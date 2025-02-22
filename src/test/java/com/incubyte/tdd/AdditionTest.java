@@ -8,7 +8,10 @@ public class AdditionTest {
 
     @Test
     public void testAddEmptyString() {
-        StringAddition stringAddition = new StringAddition();
+        Addition addition = new Addition();
+        int result = addition.add("");
+
+
 
     }
 }
