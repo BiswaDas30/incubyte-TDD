@@ -11,7 +11,14 @@ public class AdditionTest {
         Addition addition = new Addition();
         int result = addition.add("");
 
+        assertEquals(0, result);
+    }
 
+    @Test
+    public void testSingleNumberIsPassed() {
+        Addition addition = new Addition();
+        int result = addition.add("1");
 
+        assertEquals(1, result);
     }
 }
