@@ -10,32 +10,48 @@ import java.util.regex.Pattern;
 
 public class Addition {
 
+    private static final String DEFAULT_DELIMITER = ",|\n";
+    private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.*?)\n(.*)");
+    List<Integer> negativeNumbers = new ArrayList<>();
+
+
     public int add(String numbers) {
-        int sum = 0;
-        String[] numbersArray;
-        List<Integer> negativeNumbers = new ArrayList<>();
         if (numbers.isEmpty()) {
             return 0;
         }
 
-        //Default delimiter
-        String delimiter = ",|\n";
+        String delimiter = DEFAULT_DELIMITER;
         if (numbers.startsWith("//")) {
-            Matcher matcher = Pattern.compile("//(.*?)\n(.*)").matcher(numbers); //Extracting custom delimiter
+            Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(numbers);
             if (matcher.matches()) {
                 delimiter = Pattern.quote(matcher.group(1));
                 numbers = matcher.group(2);
             }
         }
 
-        numbersArray = Arrays.stream(numbers.split(delimiter))
+        String[] numbersArray = splitNumbers(numbers, delimiter);
+
+        int sum = calculateSum(numbersArray, negativeNumbers);
+
+        if (!negativeNumbers.isEmpty()) {
+            throw new NegativeNumberException("Negatives numbers not allowed: " + negativeNumbers);
+        }
+
+        return sum;
+    }
+
+    private String[] splitNumbers(String numbers, String delimiter) {
+        return Arrays.stream(numbers.split(delimiter))
                 .filter(num -> !num.isEmpty())
                 .toArray(String[]::new);
+    }
 
-        for(String num : numbersArray){
+    private int calculateSum(String[] numbersArray, List<Integer> negativeNumbers) {
+        int sum = 0;
+        for (String num : numbersArray) {
             int parsedNum = Integer.parseInt(num);
-            if(parsedNum < 0){
-                throw new NegativeNumberException("Negatives not allowed");
+            if (parsedNum < 0) {
+                negativeNumbers.add(parsedNum);
             }
             sum += parsedNum;
         }
