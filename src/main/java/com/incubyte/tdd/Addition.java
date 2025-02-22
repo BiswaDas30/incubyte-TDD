@@ -7,7 +7,12 @@ public class Addition {
         if (numbers.isEmpty()) {
             return 0;
         }
-        sum += Integer.parseInt(numbers);
+
+        String[] numbersArray = numbers.split(",");
+
+        for(String num : numbersArray){
+            sum += Integer.parseInt(num);
+        }
         return sum;
     }
 }

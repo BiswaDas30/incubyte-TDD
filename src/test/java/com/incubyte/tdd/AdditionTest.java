@@ -29,4 +29,12 @@ public class AdditionTest {
 
         assertEquals(3, result);
     }
+    
+    @Test
+    public void test_addNumberSeparatedByDelimiter() {
+        Addition addition = new Addition();
+        int result = addition.add("1;2|3\n,4\n");
+
+        assertEquals(10, result);
+    }
 }
