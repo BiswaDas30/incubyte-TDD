@@ -4,8 +4,7 @@ import com.incubyte.tdd.exception.NegativeNumberException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class AdditionTest {
 
@@ -54,7 +53,6 @@ public class AdditionTest {
         NegativeNumberException exception = assertThrows(NegativeNumberException.class, () -> {
             addition.add("//;\n1;2;-5;6;-3;-8;-4;-5");
         });
+        assertTrue(exception.getMessage().contains("Negatives numbers not allowed: [-5, -3, -8, -4, -5]"));
     }
-
-
 }
