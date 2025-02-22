@@ -1,14 +1,22 @@
 package com.incubyte.tdd;
 
+import com.incubyte.tdd.exception.NegativeNumberException;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class AdditionTest {
 
+    Addition addition;
+    @BeforeEach
+    void setUp() {
+        addition = new Addition();
+    }
     @Test
     public void test_addEmptyString() {
-        Addition addition = new Addition();
+
         int result = addition.add("");
 
         assertEquals(0, result);
@@ -16,7 +24,6 @@ public class AdditionTest {
 
     @Test
     public void test_singleNumberIsPassed() {
-        Addition addition = new Addition();
         int result = addition.add("1");
 
         assertEquals(1, result);
@@ -24,7 +31,6 @@ public class AdditionTest {
 
     @Test
     public void test_addMultipleNumbers() {
-        Addition addition = new Addition();
         int result = addition.add("1,2");
 
         assertEquals(3, result);
@@ -32,9 +38,23 @@ public class AdditionTest {
     
     @Test
     public void test_addNumberSeparatedByDelimiter() {
-        Addition addition = new Addition();
-        int result = addition.add("1;2|3\n,4\n");
+        int result = addition.add("1,2,\n3,4");
 
         assertEquals(10, result);
     }
+
+    @Test
+    public void testAddWithCustomDelimiter() {
+        int result = addition.add("//;\n1;2;5;6");
+        assertEquals(14, result);
+    }
+
+    @Test
+    public void testAddWithNegativeNumber() {
+        NegativeNumberException exception = assertThrows(NegativeNumberException.class, () -> {
+            addition.add("//;\n1;2;-5;6;-3;-8;-4;-5");
+        });
+    }
+
+
 }
