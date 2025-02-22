@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class AdditionTest {
 
     @Test
-    public void testAddEmptyString() {
+    public void test_addEmptyString() {
         Addition addition = new Addition();
         int result = addition.add("");
 
@@ -15,10 +15,18 @@ public class AdditionTest {
     }
 
     @Test
-    public void testSingleNumberIsPassed() {
+    public void test_singleNumberIsPassed() {
         Addition addition = new Addition();
         int result = addition.add("1");
 
         assertEquals(1, result);
+    }
+
+    @Test
+    public void test_addMultipleNumbers() {
+        Addition addition = new Addition();
+        int result = addition.add("1,2");
+
+        assertEquals(3, result);
     }
 }
