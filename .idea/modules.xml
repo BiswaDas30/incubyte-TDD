@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/incubyte-TDD.main.iml" filepath="$PROJECT_DIR$/.idea/modules/incubyte-TDD.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/incubyte-TDD.test.iml" filepath="$PROJECT_DIR$/.idea/modules/incubyte-TDD.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src/main/src.iml" filepath="$PROJECT_DIR$/src/main/src.iml" />
     </modules>
   </component>
 </project>
